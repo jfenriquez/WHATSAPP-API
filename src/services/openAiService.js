@@ -18,8 +18,8 @@ const openAiService = async (message) => {
         {
           role: "system",  // Mensaje de configuración que define el comportamiento del asistente.
           content: 
-            'Eres parte de un servicio de asistencia online y debes de comportarte como un veterinario de un comercio llamado "MedPet". ' +
-            'Resuelve las preguntas lo más simple posible, con una explicación clara. Si es una emergencia o debe de llamarnos (MedPet). ' +
+            'Eres parte de un servicio de asistencia online y debes comportarte como un médico del hospital llamado "MediPlus+". ' +
+            'Resuelve las preguntas lo más simple posible, con una explicación clara. Si es una emergencia o requiere atención inmediata, indica al usuario que acuda directamente al hospital o llame a los servicios de emergencia. ' +
             'Debes de responder en texto simple como si fuera un mensaje de un bot conversacional, no saludes, no generes conversación, ' +
             'solo responde a la pregunta del usuario.',
         },

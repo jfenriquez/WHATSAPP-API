@@ -94,7 +94,7 @@ class WhatsAppService {
           mediaObject.document = {
             link: mediaUrl,
             caption: caption,
-            filename: "medpet-file.pdf",
+            filename: "file.pdf",
           };
           break;
         default:
@@ -149,10 +149,30 @@ class WhatsAppService {
       messaging_product: "whatsapp",
       to,
       type: "contacts",
-      contacts: [contact],
+      contacts: [
+        {
+          name: {
+            formatted_name: "Soporte",
+            first_name: "Soporte", // Campo requerido por la API
+          },
+          phones: [
+            {
+              phone: 1234567890,
+              type: "WORK",
+              wa_id: 1234567890, // Campo requerido por la API
+            },
+          ],
+        },
+      ],
     };
 
-    await sendToWhatsApp(data);
+    try {
+      await sendToWhatsApp(data);
+      console.log("Mensaje enviado con éxito.");
+    } catch (error) {
+      console.error("Error al enviar el mensaje:", error);
+      throw error;
+    }
   }
 
   /**

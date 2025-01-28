@@ -98,16 +98,21 @@ class MessageHandler {
             description: "Descargar manual en formato PDF",
           },
           {
-            id: "send_audio",
+            id: "option_5",
             title: "🎧 Audio",
             description: "Escuchar un archivo de audio",
           },
           {
-            id: "send_image",
+            id: "option_6",
             title: "🖼 Imagen",
             description: "Ver una imagen",
           },
-          { id: "send_video", title: "📹 Video", description: "Ver un video" },
+          { id: "option_7", title: "📹 Video", description: "Ver un video" },
+          {
+            id: "option_8",
+            title: " Contactar con un agente",
+            description: "Hablar con Asesor",
+          },
         ],
       },
     ];
@@ -143,11 +148,31 @@ class MessageHandler {
         // Responde antes de enviar el medio
         response = "Aquí tienes el archivo multimedia que solicitaste.";
         await this.sendMedia(to, option); // Luego, envía el medio
-
+        break;
+      case "option_5":
+        // Responde antes de enviar el medio
+        response = "Aquí tienes el archivo multimedia que solicitaste.";
+        await this.sendMedia(to, option); // Luego, envía el medio
+        break;
+      case "option_6":
+        // Responde antes de enviar el medio
+        response = "Aquí tienes el archivo multimedia que solicitaste.";
+        await this.sendMedia(to, option); // Luego, envía el medio
+        break;
+      case "option_7":
+        // Responde antes de enviar el medio
+        response = "Aquí tienes el archivo multimedia que solicitaste.";
+        await this.sendMedia(to, option); // Luego, envía el medio
+        break;
+      case "option_8":
+        // Responde antes de enviar el medio
+        response = "Aquí tienes el contacto que solicitaste.";
+        await this.sendContact(to); // Luego, envía el medio
         break;
       default:
         response =
           "Lo siento, no entendí tu selección, Por Favor, elige una de las opciones del menú.";
+        break;
     }
     await whatsappService.sendMessage(to, response);
   }
@@ -155,15 +180,26 @@ class MessageHandler {
   // Envía diferentes tipos de medios (audio, imagen, video o documento).
   async sendMedia(to, option) {
     if (option === "option_4") {
-      const mediaUrl =
-        "https://mintic.gov.co/micrositios/conectividad-para-cambiar-vidas/835/articles-382635_proyectos_tipo_1_convocatoria_1_00.pdf";
+      const mediaUrl = "https://sample-videos.com/pdf/Sample-pdf-5mb.pdf";
       const caption = "¡Esto es un pdf!";
-      const type = "pdf";
+      const type = "document";
       await whatsappService.sendMediaMessage(to, type, mediaUrl, caption);
     } else if (option === "option_5") {
-      const mediaUrl = "https://i.blogs.es/ceda9c/dalle/450_1000.jpg";
-      const caption = "¡Esto es una video!";
+      const mediaUrl = "https://sample-videos.com/audio/mp3/crowd-cheering.mp3";
+      const caption = "¡Esto es una audio!";
+      const type = "audio";
+      await whatsappService.sendMediaMessage(to, type, mediaUrl, caption);
+    } else if (option === "option_6") {
+      const mediaUrl =
+        "https://sample-videos.com/img/Sample-png-image-100kb.png";
+      const caption = "¡Esto es una imagen!";
       const type = "image";
+      await whatsappService.sendMediaMessage(to, type, mediaUrl, caption);
+    } else if (option === "option_7") {
+      const mediaUrl =
+        "https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4";
+      const caption = "¡Esto es una video!";
+      const type = "video";
       await whatsappService.sendMediaMessage(to, type, mediaUrl, caption);
     }
   }
@@ -231,12 +267,7 @@ class MessageHandler {
 
   // Envía información de contacto.
   async sendContact(to) {
-    const contact = {
-      // Datos de contacto de ejemplo.
-      name: { formatted_name: "Nombre de Contacto" },
-      phones: [{ phone: "+1234567890", type: "WORK" }],
-    };
-    await whatsappService.sendContactMessage(to, contact);
+    await whatsappService.sendContactMessage(to);
   }
 
   // Envía una ubicación fija como ejemplo.
